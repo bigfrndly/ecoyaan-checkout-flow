@@ -2,7 +2,7 @@ import { CheckCircle, ArrowRight } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 
 export function SuccessStep() {
-    const { setCurrentStep, cartItems } = useCart();
+    const { resetCart, cartItems } = useCart();
 
     return (
         <div className="py-12 space-y-8 text-center animate-in zoom-in-95 fade-in duration-500 flex flex-col items-center">
@@ -24,8 +24,7 @@ export function SuccessStep() {
 
             <button
                 onClick={() => {
-                    // Restart flow or go to home page
-                    window.location.reload();
+                    resetCart();
                 }}
                 className="mt-8 inline-flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors group"
             >

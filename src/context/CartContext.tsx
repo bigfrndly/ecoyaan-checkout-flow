@@ -19,6 +19,7 @@ interface CartContextType {
     subtotal: number;
     grandTotal: number;
     isHydrated: boolean;
+    resetCart: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -92,6 +93,11 @@ export function CartProvider({
         setCartItems(prev => prev.filter(item => item.product_id !== id));
     };
 
+    const resetCart = () => {
+        setCartItems(initialCartData.cartItems);
+        setCurrentStep('CART');
+    };
+
     const subtotal = cartItems.reduce((total, item) => total + (item.product_price * item.quantity), 0);
     const grandTotal = subtotal + shippingFee - discountApplied;
 
@@ -115,6 +121,7 @@ export function CartProvider({
                 subtotal,
                 grandTotal,
                 isHydrated,
+                resetCart,
             }}
         >
             {children}
