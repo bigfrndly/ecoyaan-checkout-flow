@@ -3,14 +3,22 @@ import { Minus, Plus, Trash2, ArrowRight, ShoppingBag } from 'lucide-react';
 import Image from 'next/image';
 
 export function CartStep() {
-    const { cartItems, updateQuantity, removeItem, setCurrentStep, subtotal } = useCart();
+    const { cartItems, updateQuantity, removeItem, setCurrentStep, subtotal, resetCart } = useCart();
 
     if (cartItems.length === 0) {
         return (
             <div className="py-20 text-center flex flex-col items-center text-emerald-500/70">
                 <ShoppingBag size={64} className="mb-4 text-emerald-200" />
                 <p className="text-lg font-medium text-emerald-800">Your cart is empty.</p>
-                <p className="text-sm mt-2 text-emerald-600">Looks like you haven't added anything yet.</p>
+                <p className="text-sm mt-2 text-emerald-600 mb-8">Looks like you haven't added anything yet.</p>
+                
+                <button
+                    onClick={() => resetCart()}
+                    className="inline-flex items-center text-emerald-600 hover:text-emerald-800 font-medium transition-colors group bg-emerald-50 hover:bg-emerald-100 px-6 py-3 rounded-full"
+                >
+                    Add Demo Items
+                    <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </button>
             </div>
         );
     }
